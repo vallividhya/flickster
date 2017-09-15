@@ -4,6 +4,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 
 /**
@@ -18,6 +19,7 @@ public class Movie {
     String posterPath;
     String overview;
     String backdropPath;
+    float voteAverage;
 
     public String getOriginalTitle() {
         return originalTitle;
@@ -51,11 +53,20 @@ public class Movie {
         this.backdropPath = backdropPath;
     }
 
+    public float getVoteAverage() {
+        return voteAverage;
+    }
+
+    public void setVoteAverage(float voteAverage) {
+        this.voteAverage = voteAverage;
+    }
+
     public Movie(JSONObject jsonObject) throws JSONException {
         this.posterPath = jsonObject.getString("poster_path");
         this.originalTitle = jsonObject.getString("original_title");
         this.overview = jsonObject.getString("overview");
         this.backdropPath = jsonObject.getString("backdrop_path");
+        this.voteAverage = BigDecimal.valueOf(jsonObject.getDouble("vote_average")).floatValue();
     }
 
     public static ArrayList<Movie> fromJSONArray(JSONArray jArray) {
