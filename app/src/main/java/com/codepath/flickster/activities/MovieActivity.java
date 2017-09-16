@@ -1,10 +1,13 @@
 package com.codepath.flickster.activities;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.os.Parcelable;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.codepath.flickster.R;
@@ -24,6 +27,12 @@ import cz.msebera.android.httpclient.Header;
 public class MovieActivity extends AppCompatActivity {
 
     private static final String LIST_STATE = "listState";
+    public static final String POSITION = "POSITION";
+    public static final String TITLE = "TITLE";
+    public static final String IMAGE = "IMAGE_PATH";
+    public static final String RATING = "RATING";
+    public static final String SYNOPSIS = "SYNOPSIS";
+    public static int REQUEST_CODE = 20;
 
     ArrayList<Movie> movies;
     MovieArrayAdapter movieAdapter;
@@ -41,6 +50,7 @@ public class MovieActivity extends AppCompatActivity {
         movies = new ArrayList<>();
         movieAdapter = new MovieArrayAdapter(this, movies);
         lvItems.setAdapter(movieAdapter);
+        setUpListener();
         getMovies();
     }
 
@@ -57,6 +67,24 @@ public class MovieActivity extends AppCompatActivity {
         listState = state.getParcelable(LIST_STATE);
     }
 
+    private void setUpListener() {
+        // Listener to edit item on click
+        lvItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> adapterView, View view, int pos, long id) {
+                Intent intent = new Intent(MovieActivity.this, MovieDetailActivity.class);
+                Movie movie = (Movie) adapterView.getItemAtPosition(pos);
+                if (movie != null) {
+                    intent.putExtra(POSITION, pos);
+                    intent.putExtra(TITLE, movie.getOriginalTitle());
+                    intent.putExtra(IMAGE, movie.getBackdropPath());
+                    intent.putExtra(RATING, movie.getVoteAverage() / 2);
+                    intent.putExtra(SYNOPSIS, movie.getOverview());
+                    startActivity(intent);
+                }
+            }
+        });
+    }
 
     private void getMovies() {
         AsyncHttpClient httpClient = new AsyncHttpClient();
@@ -89,4 +117,5 @@ public class MovieActivity extends AppCompatActivity {
             }
         });
     }
+
 }
