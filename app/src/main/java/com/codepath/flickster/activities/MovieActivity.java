@@ -32,6 +32,7 @@ public class MovieActivity extends AppCompatActivity {
     public static final String IMAGE = "IMAGE_PATH";
     public static final String RATING = "RATING";
     public static final String SYNOPSIS = "SYNOPSIS";
+    public static final String MOVIE_ID = "MOVIE_ID";
     public static int REQUEST_CODE = 20;
 
     ArrayList<Movie> movies;
@@ -72,15 +73,26 @@ public class MovieActivity extends AppCompatActivity {
         lvItems.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int pos, long id) {
-                Intent intent = new Intent(MovieActivity.this, MovieDetailActivity.class);
                 Movie movie = (Movie) adapterView.getItemAtPosition(pos);
-                if (movie != null) {
-                    intent.putExtra(POSITION, pos);
-                    intent.putExtra(TITLE, movie.getOriginalTitle());
-                    intent.putExtra(IMAGE, movie.getBackdropPath());
-                    intent.putExtra(RATING, movie.getVoteAverage() / 2);
-                    intent.putExtra(SYNOPSIS, movie.getOverview());
-                    startActivity(intent);
+
+                if (movie.isPopularMovie()) {
+                    Intent intent = new Intent(MovieActivity.this, VideoPlayerActivity.class);
+                    if (movie != null) {
+                        intent.putExtra(POSITION, pos);
+                        intent.putExtra(TITLE, movie.getOriginalTitle());
+                        intent.putExtra(MOVIE_ID, movie.getMovieId());
+                        startActivity(intent);
+                    }
+                } else {
+                    Intent intent = new Intent(MovieActivity.this, MovieDetailActivity.class);
+                    if (movie != null) {
+                        intent.putExtra(POSITION, pos);
+                        intent.putExtra(TITLE, movie.getOriginalTitle());
+                        intent.putExtra(IMAGE, movie.getBackdropPath());
+                        intent.putExtra(RATING, movie.getVoteAverage() / 2);
+                        intent.putExtra(SYNOPSIS, movie.getOverview());
+                        startActivity(intent);
+                    }
                 }
             }
         });
@@ -107,7 +119,7 @@ public class MovieActivity extends AppCompatActivity {
                     }
                     Log.d("DEBUG", movieJsonAnrray.toString());
                 } catch (JSONException e) {
-                    e.printStackTrace();
+                    Log.e("ERROR", e.getMessage(), e);
                 }
             }
 

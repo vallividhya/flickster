@@ -49,7 +49,7 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
         Movie movie = getItem(position);
         int orientation = getContext().getResources().getConfiguration().orientation;
         if (orientation == Configuration.ORIENTATION_PORTRAIT) {
-            if (movie.getVoteAverage() > 5) {
+            if (movie.isPopularMovie()) {
                 // Portrait mode showing popular movie (only backdrop image)
                 PopularMovieViewHolder popularMovieViewHolder;
                 if (convertView == null) {
@@ -112,7 +112,7 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
                     .transform(new RoundedCornersTransformation(20, 20))
                     .into(viewHolder.ivMovieImage);
         }
-        return  convertView;
+        return convertView;
     }
 
     @Override
@@ -122,6 +122,6 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
 
     @Override
     public int getItemViewType(int position) {
-        return moviesList.get(position).getVoteAverage() > 5 ? 0 : 1;
+        return moviesList.get(position).isPopularMovie() ? 0 : 1;
     }
 }

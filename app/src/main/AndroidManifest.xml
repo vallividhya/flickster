@@ -18,7 +18,10 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".activities.MovieDetailActivity"></activity>
+        <activity android:name=".activities.MovieDetailActivity" />
+        <activity android:name=".activities.VideoPlayerActivity"
+                  android:screenOrientation="landscape">
+        </activity>
     </application>
 
 </manifest>

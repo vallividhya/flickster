@@ -15,11 +15,22 @@ public class Movie {
     static String BACKDROP_URL = "https://image.tmdb.org/t/p/w1280/%s";
     static String POSTER_URL = "https://image.tmdb.org/t/p/w342/%s";
 
+    int movieId;
     String originalTitle;
     String posterPath;
     String overview;
     String backdropPath;
     float voteAverage;
+    //String youTubeVideoKey;
+
+
+    public int getMovieId() {
+        return movieId;
+    }
+
+    public void setMovieId(int movieId) {
+        this.movieId = movieId;
+    }
 
     public String getOriginalTitle() {
         return originalTitle;
@@ -61,7 +72,21 @@ public class Movie {
         this.voteAverage = voteAverage;
     }
 
+//    public String getYouTubeVideoKey() {
+//        return youTubeVideoKey;
+//    }
+//
+//    public void setYouTubeVideoKey(String youTubeVideoKey) {
+//        this.youTubeVideoKey = youTubeVideoKey;
+//    }
+
+    public boolean isPopularMovie() {
+        return (this.getVoteAverage() > 5);
+    }
+
+
     public Movie(JSONObject jsonObject) throws JSONException {
+        this.movieId = jsonObject.getInt("id");
         this.posterPath = jsonObject.getString("poster_path");
         this.originalTitle = jsonObject.getString("original_title");
         this.overview = jsonObject.getString("overview");
