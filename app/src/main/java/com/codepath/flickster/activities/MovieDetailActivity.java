@@ -30,7 +30,7 @@ public class MovieDetailActivity extends AppCompatActivity {
             ratingBar.setRating(intent.getExtras().getFloat(MovieActivity.RATING, 5));
             synopsisText.setText(intent.getStringExtra(MovieActivity.SYNOPSIS));
             Picasso.with(getApplicationContext()).load(intent.getStringExtra(MovieActivity.IMAGE))
-                    .fit().placeholder(R.drawable.placeholder_land_light)
+                    .fit().placeholder(R.drawable.placeholder_landscape)
                     .transform(new RoundedCornersTransformation(20, 20))
                     .into(imageView);
 

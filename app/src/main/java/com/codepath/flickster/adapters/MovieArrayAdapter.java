@@ -62,7 +62,7 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
                 }
                 popularMovieViewHolder.ivPopularMovieImage.setImageResource(0);
                 Picasso.with(getContext()).load(movie.getBackdropPath())
-                        .fit().placeholder(R.drawable.placeholder_land_light)
+                        .fit().placeholder(R.drawable.placeholder_landscape)
                         .transform(new RoundedCornersTransformation(20, 20))
                         .into(popularMovieViewHolder.ivPopularMovieImage);
             } else {
@@ -85,7 +85,7 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
                 // Clears the image view
                 viewHolder.ivMovieImage.setImageResource(0);
                 Picasso.with(getContext()).load(movie.getPosterPath())
-                        .fit().placeholder(R.drawable.placeholder_potrait_light)
+                        .fit().placeholder(R.drawable.placeholder)
                         .transform(new RoundedCornersTransformation(20, 20))
                         .into(viewHolder.ivMovieImage);
             }
@@ -108,7 +108,7 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
             // Clears the image view
             viewHolder.ivMovieImage.setImageResource(0);
             Picasso.with(getContext()).load(movie.getBackdropPath())
-                    .fit().placeholder(R.drawable.placeholder_land_light)
+                    .fit().placeholder(R.drawable.placeholder_landscape)
                     .transform(new RoundedCornersTransformation(20, 20))
                     .into(viewHolder.ivMovieImage);
         }
