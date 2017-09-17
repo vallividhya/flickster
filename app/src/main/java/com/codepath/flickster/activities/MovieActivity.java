@@ -103,11 +103,11 @@ public class MovieActivity extends AppCompatActivity {
         httpClient.get(getResources().getString(R.string.now_playing_api), new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                JSONArray movieJsonAnrray = null;
+                JSONArray movieJsonArray = null;
 
                 try {
-                    movieJsonAnrray = response.getJSONArray("results");
-                    movies.addAll(Movie.fromJSONArray(movieJsonAnrray));
+                    movieJsonArray = response.getJSONArray("results");
+                    movies.addAll(Movie.fromJSONArray(movieJsonArray));
                     movieAdapter.notifyDataSetChanged();
                     // Set the scroll position of the listview from the saved state
                     // Doing it here and not on onResume() as we do not know when this async call would return
@@ -117,7 +117,7 @@ public class MovieActivity extends AppCompatActivity {
                         lvItems.onRestoreInstanceState(listState);
                         listState = null;
                     }
-                    Log.d("DEBUG", movieJsonAnrray.toString());
+                    Log.d("DEBUG", movieJsonArray.toString());
                 } catch (JSONException e) {
                     Log.e("ERROR", e.getMessage(), e);
                 }

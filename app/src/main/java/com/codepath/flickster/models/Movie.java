@@ -72,14 +72,6 @@ public class Movie {
         this.voteAverage = voteAverage;
     }
 
-//    public String getYouTubeVideoKey() {
-//        return youTubeVideoKey;
-//    }
-//
-//    public void setYouTubeVideoKey(String youTubeVideoKey) {
-//        this.youTubeVideoKey = youTubeVideoKey;
-//    }
-
     public boolean isPopularMovie() {
         return (this.getVoteAverage() > 5);
     }
