@@ -39,7 +39,7 @@ The following **additional** features are implemented:
 
 Here's a link to the video walkthrough of implemented user stories: 
 
-https://drive.google.com/file/d/0B6aCfShjRzD6a0l0MHdQQ2RtbGM/view?usp=sharing
+https://www.dropbox.com/s/8cpssuiz2wnzw6p/flickster-demo.mp4?dl=0
 
 
 ## Notes
