@@ -29,11 +29,7 @@ The following **bonus** features are implemented:
     * [x] Less popular videos rely on the detail page should show ratings and a YouTube preview.
 * [ ] Apply the popular [Butterknife annotation library](http://guides.codepath.com/android/Reducing-View-Boilerplate-with-Butterknife) to reduce boilerplate code.
 * [x] Apply rounded corners for the poster or background images using [Picasso transformations](https://guides.codepath.com/android/Displaying-Images-with-the-Picasso-Library#other-transformations)
-* [ ] Replaced android-async-http network client with the popular [OkHttp](http://guides.codepath.com/android/Using-OkHttp) networking libraries.
-
-The following **additional** features are implemented:
-
-* [ ] List anything else that you can get done to improve the app functionality!
+* [x] Replaced android-async-http network client with the popular [OkHttp](http://guides.codepath.com/android/Using-OkHttp) networking libraries.
 
 ## Video Walkthrough
 
@@ -49,6 +45,7 @@ https://www.dropbox.com/s/8cpssuiz2wnzw6p/flickster-demo.mp4?dl=0
 
 - [Android Async HTTP](https://github.com/loopj/android-async-http) - Simple asynchronous HTTP requests with JSON parsing
 - [Picasso](http://square.github.io/picasso/) - Image loading and caching library for Android
+- [OkHttp](http://square.github.io/okhttp/) - A HTTP Client. 
 
 ## License
 
@@ -75,5 +72,5 @@ The following dependencies are required for this project.
     compile 'com.loopj.android:android-async-http:1.4.9'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'jp.wasabeef:picasso-transformations:2.1.0'
-    compile 'jp.wasabeef:picasso-transformations:2.1.0'
+    compile 'com.squareup.okhttp3:okhttp:3.6.0'
 
