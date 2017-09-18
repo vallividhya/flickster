@@ -122,6 +122,6 @@ public class MovieArrayAdapter extends ArrayAdapter<Movie> {
 
     @Override
     public int getItemViewType(int position) {
-        return moviesList.get(position).isPopularMovie() ? 0 : 1;
+        return moviesList.get(position).getVoteAverage() > 5 ? 0 : 1;
     }
 }

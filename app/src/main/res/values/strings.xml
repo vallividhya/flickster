@@ -5,5 +5,6 @@
     <string name="movie_videos_api">https://api.themoviedb.org/3/movie/%d/videos?api_key=a07e22bc18f5cb106bfe4cc1f83ad8ed&amp;language=en-US</string>
     <string name="youtube_api_key">AIzaSyDzM0tYqCSwy2PAWdVgrlhgZ1WPOCBrDjM</string>
     <string name="movie_title_placeholder">True to the Game</string>
+    <string name="error_message">Something went wrong</string>
     <string name="movie_summary_placeholder">Based on the Terri Woods best selling novel, True to the Game is the love story of Quadir Richards, a charismatic drug lord, and Gena Rollins, a young girl from the projects of Philly. Quadir was able to gain the trust and love of Gena and was on his way out of the game to start a new life with his future bride when tragedy strikes.</string>
 </resources>

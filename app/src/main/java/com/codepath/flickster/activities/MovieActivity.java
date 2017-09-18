@@ -9,20 +9,25 @@ import android.util.Log;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.Toast;
 
 import com.codepath.flickster.R;
 import com.codepath.flickster.adapters.MovieArrayAdapter;
 import com.codepath.flickster.models.Movie;
-import com.loopj.android.http.AsyncHttpClient;
-import com.loopj.android.http.JsonHttpResponseHandler;
 
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.util.ArrayList;
 
-import cz.msebera.android.httpclient.Header;
+import okhttp3.Call;
+import okhttp3.Callback;
+import okhttp3.OkHttpClient;
+import okhttp3.Request;
+import okhttp3.Response;
+
 
 public class MovieActivity extends AppCompatActivity {
 
@@ -52,7 +57,8 @@ public class MovieActivity extends AppCompatActivity {
         movieAdapter = new MovieArrayAdapter(this, movies);
         lvItems.setAdapter(movieAdapter);
         setUpListener();
-        getMovies();
+        //getMovies();
+        getMoviesUsingOkHTTP();
     }
 
     @Override
@@ -98,34 +104,54 @@ public class MovieActivity extends AppCompatActivity {
         });
     }
 
-    private void getMovies() {
-        AsyncHttpClient httpClient = new AsyncHttpClient();
-        httpClient.get(getResources().getString(R.string.now_playing_api), new JsonHttpResponseHandler() {
+    private void getMoviesUsingOkHTTP() {
+        OkHttpClient client = new OkHttpClient();
+        Request request = new Request.Builder().url(getResources().getString(R.string.now_playing_api)).build();
+        client.newCall(request).enqueue(new Callback() {
             @Override
-            public void onSuccess(int statusCode, Header[] headers, JSONObject response) {
-                JSONArray movieJsonArray = null;
-
-                try {
-                    movieJsonArray = response.getJSONArray("results");
-                    movies.addAll(Movie.fromJSONArray(movieJsonArray));
-                    movieAdapter.notifyDataSetChanged();
-                    // Set the scroll position of the listview from the saved state
-                    // Doing it here and not on onResume() as we do not know when this async call would return
-                    // There could be an instance when the list view is already set, but the results from the network call
-                    // have not returned yet.
-                    if (listState != null) {
-                        lvItems.onRestoreInstanceState(listState);
-                        listState = null;
+            public void onFailure(Call call, IOException e) {
+                MovieActivity.this.runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        Toast.makeText(getApplicationContext(),getResources().getString(R.string.error_message), Toast.LENGTH_SHORT).show();
                     }
-                    Log.d("DEBUG", movieJsonArray.toString());
-                } catch (JSONException e) {
-                    Log.e("ERROR", e.getMessage(), e);
-                }
+                });
+                Log.d("ERROR", e.getMessage());
             }
 
             @Override
-            public void onFailure(int statusCode, Header[] headers, Throwable throwable, JSONObject errorResponse) {
-                super.onFailure(statusCode, headers, throwable, errorResponse);
+            public void onResponse(Call call, Response response) throws IOException {
+                JSONArray movieJsonAnrray = null;
+                if (!response.isSuccessful()) {
+                    throw new IOException("Unexpected Code " + response);
+                } else {
+
+                    try {
+                        String responseString = response.body().string();
+                        JSONObject json = new JSONObject(responseString);
+                        movieJsonAnrray = json.getJSONArray("results");
+                        movies.addAll(Movie.fromJSONArray(movieJsonAnrray));
+
+
+                        MovieActivity.this.runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                movieAdapter.notifyDataSetChanged();
+                                // Set the scroll position of the listview from the saved state
+                                // Doing it here and not on onResume() as we do not know when this async call would return
+                                // There could be an instance when the list view is already set, but the results from the network call
+                                // have not returned yet.
+                                if (listState != null) {
+                                    lvItems.onRestoreInstanceState(listState);
+                                    listState = null;
+                                }
+                            }
+                        });
+                        Log.d("DEBUG", movieJsonAnrray.toString());
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
             }
         });
     }
