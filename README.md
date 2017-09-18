@@ -1,6 +1,6 @@
-# Project 1 - *Name of App Here*
+# Project 1 - Flickster
 
-**Name of your app** shows the latest movies currently playing in theaters. The app utilizes the Movie Database API to display images and basic information about these movies to the user.
+Flickster shows the latest movies currently playing in theaters. The app utilizes the Movie Database API to display images and basic information about these movies to the user.
 
 Time spent: 18 - 20 hours spent in total
 
@@ -44,22 +44,6 @@ https://www.dropbox.com/s/8cpssuiz2wnzw6p/flickster-demo.mp4?dl=0
 
 ## Notes
 
-The following dependencies are required for this project.
-
-   dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
-    androidTestCompile('com.android.support.test.espresso:espresso-core:2.2.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
-    compile files('libs/YouTubeAndroidPlayerApi.jar')
-    compile 'com.android.support:appcompat-v7:26.+'
-    compile 'com.android.support.constraint:constraint-layout:1.0.2'
-    compile 'com.loopj.android:android-async-http:1.4.9'
-    compile 'com.squareup.picasso:picasso:2.5.2'
-    compile 'jp.wasabeef:picasso-transformations:2.1.0'
-    compile 'com.squareup.okhttp3:okhttp:3.6.0'
-    testCompile 'junit:junit:4.12'
-}
 
 ## Open-source libraries used
 
@@ -91,3 +75,5 @@ The following dependencies are required for this project.
     compile 'com.loopj.android:android-async-http:1.4.9'
     compile 'com.squareup.picasso:picasso:2.5.2'
     compile 'jp.wasabeef:picasso-transformations:2.1.0'
+    compile 'jp.wasabeef:picasso-transformations:2.1.0'
+
